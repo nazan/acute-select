@@ -798,11 +798,6 @@ angular.module("acute.select", [])
     this.$get = [function() {
         return {
             getSettings: function () {
-                // Add trailing "/" to template path if not present
-                var len = defaultSettings.templatePath.length;
-                if (len > 0 && defaultSettings.templatePath.substr(len - 1, 1) !== "/") {
-                    defaultSettings.templatePath += "/";
-                }
                 return angular.copy(defaultSettings);
             },
             updateSetting: function (settingName, value) {
