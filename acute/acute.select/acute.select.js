@@ -776,7 +776,7 @@ angular.module("acute.select", [])
 .factory('acuteSelectService', function () {
 
     var defaultSettings = {
-        "templatePath": "/acute.select/",
+        "templatePath": "/acute.select/acute.select.htm",
         "noItemsText": "No items found.",
         "itemHeight": 24,
         "itemsInView": 10,
