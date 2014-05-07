@@ -773,7 +773,7 @@ angular.module("acute.select", [])
 }])
 
 // Service to allow host pages to change settings for all instances (in their module.run function)
-.factory('acuteSelectService', function () {
+.provider('acuteSelectService', function () {
 
     var defaultSettings = {
         "templatePath": "/acute.select/acute.select.htm",
@@ -790,20 +790,28 @@ angular.module("acute.select", [])
         "filterType": "contains",    // or "start"
         "allowClear": true
     };
-
-    return {
-        getSettings: function () {
-            // Add trailing "/" to template path if not present
-            var len = defaultSettings.templatePath.length;
-            if (len > 0 && defaultSettings.templatePath.substr(len - 1, 1) !== "/") {
-                defaultSettings.templatePath += "/";
-            }
-            return angular.copy(defaultSettings);
-        },
-        updateSetting: function (settingName, value) {
-            if (defaultSettings.hasOwnProperty(settingName)) {
-                defaultSettings[settingName] = value;
-            }
-        }
+    
+    this.setSettings = function(settings) {
+        angular.extend(defaultSettings, settings);
     };
+    
+    this.$get = [function() {
+        return {
+            getSettings: function () {
+                // Add trailing "/" to template path if not present
+                var len = defaultSettings.templatePath.length;
+                if (len > 0 && defaultSettings.templatePath.substr(len - 1, 1) !== "/") {
+                    defaultSettings.templatePath += "/";
+                }
+                return angular.copy(defaultSettings);
+            },
+            updateSetting: function (settingName, value) {
+                if (defaultSettings.hasOwnProperty(settingName)) {
+                    defaultSettings[settingName] = value;
+                }
+            }
+        };
+    }];
+
+    
 });
