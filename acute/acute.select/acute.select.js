@@ -22,7 +22,7 @@ angular.module("acute.select", [])
             "model": "=acModel",
         },
         replace: true,
-        templateUrl: defaultSettings.templatePath + "acute.select.htm",
+        templateUrl: defaultSettings.templatePath,
         link: function (scope, element, attrs) {
 
             scope.settings = acuteSelectService.getSettings();
